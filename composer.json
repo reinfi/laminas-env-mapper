@@ -1,0 +1,38 @@
+{
+    "name": "reinfi/laminas-env-mapper",
+    "description": "Map $_ENV to objects using EnvMapper",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Reinfi\\LaminasEnvMapper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Reinfi\\LaminasEnvMapper\\Test\\": "test/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Reinfi",
+            "email": "martin.reinfandt@check24.de"
+        }
+    ],
+    "require": {
+        "php": "~8.1.0 || ~8.2.0",
+        "laminas/laminas-servicemanager": "^2.7 | ^3.0",
+        "crell/envmapper": "^1.0"
+    },
+    "require-dev": {
+        "symplify/easy-coding-standard": "^11.2",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.0"
+    },
+    "scripts": {
+        "cs-check": "ecs check",
+        "cs-fix": "ecs check --fix",
+        "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
+        "test": "vendor/bin/phpunit --no-coverage"
+    }
+}
