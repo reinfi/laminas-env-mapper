@@ -8,6 +8,7 @@ use Crell\EnvMapper\EnvMapper;
 use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 use Psr\Container\ContainerInterface;
 use Reinfi\LaminasEnvMapper\EnvObjectInterface;
+use Reinfi\LaminasEnvMapper\Exception\InvalidObjectException;
 
 class AbstractEnvObjectMapperFactory implements AbstractFactoryInterface
 {
@@ -16,11 +17,19 @@ class AbstractEnvObjectMapperFactory implements AbstractFactoryInterface
         $requestedName,
         ?array $options = null
     ): object {
+        if (! is_string($requestedName) || ! class_exists($requestedName)) {
+            throw new InvalidObjectException();
+        }
+
         return (new EnvMapper())->map($requestedName);
     }
 
     public function canCreate(ContainerInterface $container, $requestedName): bool
     {
-        return is_a($requestedName, EnvObjectInterface::class);
+        if (! is_string($requestedName) || ! class_exists($requestedName)) {
+            return false;
+        }
+
+        return is_subclass_of($requestedName, EnvObjectInterface::class);
     }
 }

@@ -7,6 +7,7 @@ namespace Reinfi\LaminasEnvMapper\Test\AbstractFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Reinfi\LaminasEnvMapper\AbstractFactory\AbstractEnvObjectMapperFactory;
+use Reinfi\LaminasEnvMapper\Exception\InvalidObjectException;
 use Reinfi\LaminasEnvMapper\Test\Double\Configuration;
 use Reinfi\LaminasEnvMapper\Test\Double\ConfigurationWithInterface;
 
@@ -37,5 +38,16 @@ class AbstractEnvObjectMapperFactoryTest extends TestCase
 
         self::assertInstanceOf(ConfigurationWithInterface::class, $configuration);
         self::assertEquals('foo', $configuration->value);
+    }
+
+    public function testItThrowsExceptionIfClassDoesNotExists(): void
+    {
+        self::expectException(InvalidObjectException::class);
+
+        $factory = new AbstractEnvObjectMapperFactory();
+
+        $container = $this->createMock(ContainerInterface::class);
+
+        $factory($container, 'ThisIsNotAClass');
     }
 }
