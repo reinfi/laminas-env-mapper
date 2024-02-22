@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Reinfi\LaminasEnvMapper\Test\Factory;
+namespace Reinfi\LaminasEnvMapper\Test\Unit\Factory;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
