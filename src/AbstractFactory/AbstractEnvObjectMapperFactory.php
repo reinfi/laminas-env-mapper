@@ -12,11 +12,8 @@ use Reinfi\LaminasEnvMapper\Exception\InvalidObjectException;
 
 class AbstractEnvObjectMapperFactory implements AbstractFactoryInterface
 {
-    public function __invoke(
-        ContainerInterface $container,
-        $requestedName,
-        ?array $options = null
-    ): object {
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): object
+    {
         if (! is_string($requestedName) || ! class_exists($requestedName)) {
             throw new InvalidObjectException();
         }
